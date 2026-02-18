@@ -1,0 +1,4 @@
+[project]
+name = "cron"
+version = "0.1.0"
+description = "Schedule recurring tasks with intervals"
