@@ -1,14 +1,25 @@
-fn main() -> int {
-    Test.init("cron")
+test "60s in ms" {
     // Interval calculation
     var interval_sec = 60
     var interval_ms = interval_sec * 1000
-    Test.assert_eq_int(interval_ms, 60000, "60s in ms")
+    assert_eq(interval_ms, 60000)
+}
+
+test "runs per hour" {
+    // Interval calculation
+    var interval_sec = 60
+    var interval_ms = interval_sec * 1000
     // Schedule math
     var runs_per_hour = 3600 / interval_sec
-    Test.assert_eq_int(runs_per_hour, 60, "runs per hour")
+    assert_eq(runs_per_hour, 60)
+}
+
+test "runs per day" {
+    // Interval calculation
+    var interval_sec = 60
+    var interval_ms = interval_sec * 1000
+    // Schedule math
+    var runs_per_hour = 3600 / interval_sec
     var runs_per_day = runs_per_hour * 24
-    Test.assert_eq_int(runs_per_day, 1440, "runs per day")
-    Test.summary()
-    return 0
+    assert_eq(runs_per_day, 1440)
 }
