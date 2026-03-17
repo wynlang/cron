@@ -1,0 +1,27 @@
+fn cron_interval_ms(seconds: int) -> int {
+    return seconds * 1000
+}
+
+fn cron_runs_per_hour(interval_sec: int) -> int {
+    if interval_sec <= 0 { return 0 }
+    return 3600 / interval_sec
+}
+
+fn cron_runs_per_day(interval_sec: int) -> int {
+    if interval_sec <= 0 { return 0 }
+    return 86400 / interval_sec
+}
+
+fn cron_next_run_ms(last_run_ms: int, interval_ms: int) -> int {
+    return last_run_ms + interval_ms
+}
+
+fn main() {
+    var interval = 30
+    println("interval ms: " + cron_interval_ms(interval).to_string())
+    println("runs/hour: " + cron_runs_per_hour(interval).to_string())
+    println("runs/day: " + cron_runs_per_day(interval).to_string())
+    var last = 1000000
+    var next = cron_next_run_ms(last, cron_interval_ms(interval))
+    println("next run ms: " + next.to_string())
+}

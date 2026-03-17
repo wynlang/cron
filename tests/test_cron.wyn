@@ -1,25 +1,16 @@
-test "60s in ms" {
-    // Interval calculation
-    var interval_sec = 60
-    var interval_ms = interval_sec * 1000
-    assert_eq(interval_ms, 60000)
-}
+fn cron_interval_ms(seconds: int) -> int { return seconds * 1000 }
+fn cron_runs_per_hour(interval_sec: int) -> int { return 3600 / interval_sec }
+fn cron_runs_per_day(interval_sec: int) -> int { return 86400 / interval_sec }
+fn cron_next_run_ms(last_run_ms: int, interval_ms: int) -> int { return last_run_ms + interval_ms }
 
-test "runs per hour" {
-    // Interval calculation
-    var interval_sec = 60
-    var interval_ms = interval_sec * 1000
-    // Schedule math
-    var runs_per_hour = 3600 / interval_sec
-    assert_eq(runs_per_hour, 60)
-}
-
-test "runs per day" {
-    // Interval calculation
-    var interval_sec = 60
-    var interval_ms = interval_sec * 1000
-    // Schedule math
-    var runs_per_hour = 3600 / interval_sec
-    var runs_per_day = runs_per_hour * 24
-    assert_eq(runs_per_day, 1440)
+fn main() -> int {
+    assert_eq(cron_interval_ms(60), 60000)
+    assert_eq(cron_interval_ms(1), 1000)
+    assert_eq(cron_runs_per_hour(60), 60)
+    assert_eq(cron_runs_per_hour(3600), 1)
+    assert_eq(cron_runs_per_day(60), 1440)
+    assert_eq(cron_next_run_ms(1000, 5000), 6000)
+    
+    println("cron: 6 tests passed")
+    return 0
 }
