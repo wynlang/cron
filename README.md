@@ -1,4 +1,4 @@
-# cron — Official Wyn Package
+# cron - Official Wyn Package
 
 Schedule recurring tasks. Pure Wyn.
 
