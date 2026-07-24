@@ -1,0 +1,18 @@
+pub fn cron_interval_ms(seconds: int) -> int {
+    return seconds * 1000
+}
+
+pub fn cron_runs_per_hour(interval_sec: int) -> int {
+    if interval_sec <= 0 { return 0 }
+    return 3600 / interval_sec
+}
+
+pub fn cron_runs_per_day(interval_sec: int) -> int {
+    if interval_sec <= 0 { return 0 }
+    return 86400 / interval_sec
+}
+
+pub fn cron_next_run_ms(last_run_ms: int, interval_ms: int) -> int {
+    return last_run_ms + interval_ms
+}
+

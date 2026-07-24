@@ -1,16 +1,10 @@
-fn cron_interval_ms(seconds: int) -> int { return seconds * 1000 }
-fn cron_runs_per_hour(interval_sec: int) -> int { return 3600 / interval_sec }
-fn cron_runs_per_day(interval_sec: int) -> int { return 86400 / interval_sec }
-fn cron_next_run_ms(last_run_ms: int, interval_ms: int) -> int { return last_run_ms + interval_ms }
+// Exercises the shipped lib in src/cron.wyn via the tests/cron.wyn symlink.
+import cron
 
-fn main() -> int {
-    assert_eq(cron_interval_ms(60), 60000)
-    assert_eq(cron_interval_ms(1), 1000)
-    assert_eq(cron_runs_per_hour(60), 60)
-    assert_eq(cron_runs_per_hour(3600), 1)
-    assert_eq(cron_runs_per_day(60), 1440)
-    assert_eq(cron_next_run_ms(1000, 5000), 6000)
-    
-    println("cron: 6 tests passed")
-    return 0
-}
+test "interval to ms" { assert_eq(cron.cron_interval_ms(30), 30000) }
+test "runs per hour" { assert_eq(cron.cron_runs_per_hour(60), 60) }
+test "runs per hour 30s" { assert_eq(cron.cron_runs_per_hour(30), 120) }
+test "runs per hour zero guard" { assert_eq(cron.cron_runs_per_hour(0), 0) }
+test "runs per day" { assert_eq(cron.cron_runs_per_day(3600), 24) }
+test "runs per day zero guard" { assert_eq(cron.cron_runs_per_day(0), 0) }
+test "next run" { assert_eq(cron.cron_next_run_ms(1000000, 30000), 1030000) }

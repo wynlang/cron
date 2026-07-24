@@ -1,0 +1,9 @@
+import cron
+
+fn main() {
+    var interval = 30
+    println("interval ms: ${cron.cron_interval_ms(interval)}")
+    println("runs/hour: ${cron.cron_runs_per_hour(interval)}")
+    println("runs/day: ${cron.cron_runs_per_day(interval)}")
+    println("next run ms: ${cron.cron_next_run_ms(1000000, cron.cron_interval_ms(interval))}")
+}
